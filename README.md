@@ -31,3 +31,42 @@ function mystery(n) {
 Add your answer to this markdown file. [This
 page](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions)
 might help with the notation for mathematical expressions.
+
+# My Answer:
+
+$T(n) = 1$ when $n \leq 1$ and $T(n) = 3T(n/3) + 2n^2 + n$ when $n > 1$
+My process behind this recurrence relation is that the function recursively calls itself
+three times, with $n/3$ as the argument in $T(n)$, it also has two nested loops that iterates
+n squared times, thus $2n^2$, and a third loop that iterates $n$ times. From this I 
+concluded that $T(n) = 3T(n/3) + 2n^2 + n$ when $n > 1$. Subbing the equation
+into itself yields:
+
+$T(n) = 3T(n/3) + 2n^2 + n$
+
+$T(n) = 3(3T([n/3]/3) + 2(n^2)/3 + (n/3) )$
+
+$T(n) = 9T(n/9) + 4n^2 + 2n$
+
+$T(n) = 27T(n/27) + 6n^2 + 3n$
+
+Seeing a pattern I generalized the equation as:
+
+$T(n) = 3^iT(n/3^i) + (2 + i)n^2 + in$
+
+Where $i$ is the number of recursive calls. In this case the number of calls being $log_{3}(n)$
+seeing as $n/3$ is the argument given in each call. Thus $i = log_{3}(n)$. Now we can simplify
+the equation:
+
+$T(n) = 3^{log_{3}(n)}T(n/[3^{log_{3}(n)}]) + (2 + log_{3}(n))n^2 + n \cdot log_{3}(n)$
+
+$T(n) = n + 2n^2 + n^2 \cdot log_{3}(n) + n \cdot log_{3}(n)$
+
+Or
+
+$T(n) = n(1 + 2n + n \cdot log_{3}(n) + log_{3}(n))$
+
+Ignoring constants and lower terms the theoretical runtime is $O(n^2)$
+
+
+
+
